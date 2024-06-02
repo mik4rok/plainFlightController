@@ -52,8 +52,8 @@ void initActuators(void)
     //Configure servo timer channels on ledc peripheral
     for(uint32_t i=0; i<NUM_SERVOS; i++)
     {
-      ledcSetup(i, SERVO_REFRESH, LEDC_RESOLUTION);
-      ledcAttachPin(pwmPin[i], i);
+      ledcAttach(i, SERVO_REFRESH, LEDC_RESOLUTION);
+      //ledcAttachPin(pwmPin[i], i);
       ledcWrite(i, SERVO_CENTRE_TICKS);
     }
   #endif
@@ -63,16 +63,16 @@ void initActuators(void)
       //Configure motor timer channels on ledc peripheral for Oneshot125 protocol
       for(uint32_t i=NUM_SERVOS; i<(NUM_SERVOS+NUM_MOTORS); i++)
       {
-        ledcSetup(i, ONESHOT125_REFRESH, LEDC_RESOLUTION);
-        ledcAttachPin(pwmPin[i], i);
+        ledcAttach(i, ONESHOT125_REFRESH, LEDC_RESOLUTION);
+        //ledcAttachPin(pwmPin[i], i);
         ledcWrite(i, ONESHOT125_MIN_TICKS);
       }
     #else
       //Configure motor timer channels on ledc peripheral
       for(uint32_t i=NUM_SERVOS; i<(NUM_SERVOS+NUM_MOTORS); i++)
       {
-        ledcSetup(i, SERVO_REFRESH, LEDC_RESOLUTION);
-        ledcAttachPin(pwmPin[i], i);
+        ledcAttach(i, SERVO_REFRESH, LEDC_RESOLUTION);
+        //ledcAttachPin(pwmPin[i], i);
         ledcWrite(i, SERVO_MIN_TICKS);
       }
     #endif
